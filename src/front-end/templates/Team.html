@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/team.css') }}">
+{% endblock %}
+
+{% block page_content %}
+  <h1>Our Team</h1>
+  <div class="team-flexbox">
+    <div class=team-flexbox-item>
+      <div class="card">
+        <img src="{{ url_for('static', filename='assets/ProfilePicNick.jpg') }}" alt="Nick" style="width:100%">
+        <h2>Nick Hefner</h2>
+        <p class="title">Software Engineer, OptumRX</p>
+        <p>University of California, Irvine</p>
+        <div style="margin: 1% 0;">
+          <a href="https://www.linkedin.com/in/nicholas-hefner-b9823913b/"><i class="fa fa-linkedin fa-2x"></i></a>
+          <a href="https://github.com/nhefner12"><i class="fa fa-github fa-2x"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class=team-flexbox-item>
+      <div class="card">
+        <img src="{{ url_for('static', filename='assets/ProfilePicKash.PNG') }}" alt="Kash" style="width:100%">
+        <h2>Kash Santos</h2>
+        <p class="title">IT Director, Informative Research</p>
+        <p>University of California, Irvine</p>
+        <div style="margin: 1% 0;">
+          <a href="https://www.linkedin.com/in/kashsantos/"><i class="fa fa-linkedin fa-2x"></i></a>
+          <a href="https://github.com/ksantos79"><i class="fa fa-github fa-2x"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class=team-flexbox-item>
+      <div class="card">
+        <img src="{{ url_for('static', filename='assets/ProfilePicSadaf.jpg') }}" alt="Sadaf" style="width:100%">
+        <h2>Sadaf Mehdizadeh</h2>
+        <p class="title">Data Scientist, Informative Research</p>
+        <p class="education">University of California, Irvine</p>
+        <div style="margin: 1% 0;">
+          <a href="#"><i class="fa fa-linkedin fa-2x"></i></a>
+          <a href="#"><i class="fa fa-github fa-2x"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block bottomjs %}
+{% endblock %}

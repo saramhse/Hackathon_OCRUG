@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/model.css') }}">
+{% endblock %}
+
+{% block page_content %}
+  <h1>Score Assesment</h1>
+
+  {% if prediction is defined %}
+  <div class="modelScore">
+    Likelihood of making a deposite: <span>{{ prediction }}</span>
+  </div>
+  {% endif %}
+  <form id="modelForm" action="{{ url_for('GenerateModel') }}" method="post" class="form-style-9">
+    <ul>
+    <li>
+        <input type="text" name="age" class="field-style field-split align-left" placeholder="Age" required />
+        <input type="text" name="balance" class="field-style field-split align-right" placeholder="Balance" required />
+    </li>
+    <li>
+        <input type="text" name="campaign" class="field-style field-split align-left" placeholder="Campaign" required />
+        <input type="text" name="previous" class="field-style field-split align-right" placeholder="Number Previous Contacts" required />
+    </li>
+    <li>
+        <input type="text" name="duration" class="field-style field-split align-left" placeholder="Duration" required />
+
+      <div class="input-group field-style field-split align-right">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="default">Past Credit Defaults</label>
+        </div>
+        <select class="custom-select" id="default" name="default" required>
+          <option value="yes" selected>Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+    </li>
+    <li>
+      <div class="input-group field-style field-split align-left">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="job">Occupation</label>
+        </div>
+        <select class="custom-select" id="job" name="job" required>
+          <option value="" selected>Choose...</option>
+          <option value="management">Management</option>
+          <option value="technician">Technician</option>
+          <option value="entreprenuer">Entrepreneur</option>
+          <option value="blue-coller">Blue-Collar</option>
+          <option value="retired">Retired</option>
+          <option value="admin">Admin</option>
+          <option value="services">Services</option>
+          <option value="self-employed">Self-Employed</option>
+          <option value="unemployed">Unemployed</option>
+          <option value="housemaid">Housemaid</option>
+          <option value="student">Student</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="input-group field-style field-split align-right">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="marital">Marital Status</label>
+        </div>
+        <select class="custom-select" id="marital" name="marital" required>
+          <option value="" selected>Choose...</option>
+          <option value="single">Single</option>
+          <option value="married">Married</option>
+          <option value="divorced">Divorced</option>
+        </select>
+      </div>
+    </li>
+
+    <li>
+      <div class="input-group field-style field-split align-left">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="education">Education</label>
+        </div>
+        <select class="custom-select" id="education" name="education">
+          <option value="" selected>Choose...</option>
+          <option value="primary">Primary</option>
+          <option value="secondary">Secondary</option>
+          <option value="teritary">Teritary</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="input-group field-style field-split align-right">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="pdays_bin">Days Since Last Reach Out</label>
+        </div>
+        <select class="custom-select" id="pdays_bin" name="pdays_bin" required>
+          <option value="" selected>Choose...</option>
+          <option value="(-2, -1]">No Reach Out</option>
+          <option value="(0, 400]">0 - 400 Days</option>
+          <option value="(400, 900]">400+ Days</option>
+        </select>
+      </div>
+    </li>
+    <li>
+      <div class="input-group field-style field-split align-left">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="housing">House Ownership</label>
+        </div>
+        <select class="custom-select" id="housing" name="housing" required>
+          <option value="yes" selected>Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+
+      <div class="input-group field-style field-split align-right">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="loan">Past Personal Loan Conversions</label>
+        </div>
+        <select class="custom-select" id="loan" name="loan" required>
+          <option value="yes" selected>Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+    </li>
+    <li>
+      <div class="input-group field-style field-split align-left">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="contact">Contact Preference</label>
+        </div>
+        <select class="custom-select" id="contact" name="contact" required>
+          <option value="" selected>Choose...</option>
+          <option value="cellular">Cellular</option>
+          <option value="telephone">Telephone</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="input-group field-style field-split align-right">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="poutcome">Outcome of Last Reach Out</label>
+        </div>
+        <select class="custom-select" id="poutcome" name="poutcome" required>
+          <option value="" selected>Choose...</option>
+          <option value="success">Success</option>
+          <option value="failure">Failure</option>
+          <option value="other">Other</option>
+          <option value="DNE">No Reach-Out</option>
+        </select>
+      </div>
+    </li>
+    <li>
+      <div class="input-group field-style field-split align-left">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="day_bin">Last Contact Day of Month</label>
+        </div>
+        <select class="custom-select" id="day_bin" name="day_bin" required>
+          <option value="" selected>Choose...</option>
+          <option value="(0, 7]">1</option>
+          <option value="(0, 7]">2</option>
+          <option value="(0, 7]">3</option>
+          <option value="(0, 7]">4</option>
+          <option value="(0, 7]">5</option>
+          <option value="(0, 7]">6</option>
+          <option value="(0, 7]">7</option>
+          <option value="(7, 14]">8</option>
+          <option value="(7, 14]">9</option>
+          <option value="(7, 14]">10</option>
+          <option value="(7, 14]">11</option>
+          <option value="(7, 14]">12</option>
+          <option value="(7, 14]">13</option>
+          <option value="(7, 14]">14</option>
+          <option value="(14, 21]">15</option>
+          <option value="(14, 21]">16</option>
+          <option value="(14, 21]">17</option>
+          <option value="(14, 21]">18</option>
+          <option value="(14, 21]">19</option>
+          <option value="(14, 21]">20</option>
+          <option value="(21, 28]">21</option>
+          <option value="(21, 28]">22</option>
+          <option value="(21, 28]">23</option>
+          <option value="(21, 28]">24</option>
+          <option value="(21, 28]">25</option>
+          <option value="(21, 28]">26</option>
+          <option value="(21, 28]">27</option>
+          <option value="(28, 31]">28</option>
+          <option value="(28, 31]">29</option>
+          <option value="(28, 31]">30</option>
+          <option value="(28, 31]">31</option>
+        </select>
+      </div>
+
+      <div class="input-group field-style field-split align-right">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="month">Month</label>
+        </div>
+        <select class="custom-select" id="month" name="month" required>
+          <option value="" selected>Choose...</option>
+          <option value="1">Jan</option>
+          <option value="2">Feb</option>
+          <option value="3">Mar</option>
+          <option value="4">Apr</option>
+          <option value="5">May</option>
+          <option value="6">Jun</option>
+          <option value="7">Jul</option>
+          <option value="8">Aug</option>
+          <option value="9">Sep</option>
+          <option value="10">Oct</option>
+          <option value="11">Nov</option>
+          <option value="12">Dec</option>
+        </select>
+      </div>
+    </li>
+    <li>
+
+
+    </li>
+    <!-- <li>
+        <input type="text" name="month" class="field-style field-split align-left" placeholder="Month" required />
+        <input type="text" name="durantion" class="field-style field-split align-right" placeholder="duration" required />
+    </li>
+    <li>
+        <input type="text" name="month" class="field-style field-split align-left" placeholder="Month" required />
+        <input type="text" name="durantion" class="field-style field-split align-right" placeholder="duration" required />
+    </li>
+    <li>
+        <input type="text" name="month" class="field-style field-split align-left" placeholder="Month" required />
+        <input type="text" name="durantion" class="field-style field-split align-right" placeholder="duration" required />
+    </li>
+    <!-- <li>
+    <input type="text" name="field3" class="field-style field-full align-none" placeholder="Subject" required />
+    </li>
+    <li>
+    <textarea name="field5" class="field-style" placeholder="Message" required></textarea>
+    </li> -->
+    <li>
+    <input type="submit" value="Generate" />
+    </li>
+    </ul>
+  </form>
+
+{% endblock %}
+
+{% block bottomjs %}
+{% endblock %}
